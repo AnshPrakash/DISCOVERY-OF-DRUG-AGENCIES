@@ -51,6 +51,9 @@ public class SAT {
 	}
 
 	public static void No_Subgraph(boolean[][] adjacencyMatrix){
+		
+	}
+	public static void AtLeastOneEdge(boolean[][] adjacencyMatrix){
 		try{
 			String s="";
 			for (int i=1;i<variable_names.length;i++ ) {
@@ -72,12 +75,7 @@ public class SAT {
 		}catch(Exception e){
 			System.out.println("Something went wrong in No_Subgraph function");
 		}
-
-		
 	}
-	// public static void AtLeastOneEdge(boolean[][] adjacencyMatrix,int k){
-
-	// }
 
 	public static void GenerateSAT(boolean[][] adjacencyMatrix,int k){
 
@@ -113,7 +111,7 @@ public class SAT {
 		Non_Empty();
 		No_Subgraph(adjacencyMatrix);
 		AtLeast_OneNode(adjacencyMatrix,k);
-		// AtLeastOneEdge(adjacencyMatrix,k);
+		AtLeastOneEdge(adjacencyMatrix);
 		AllKgraphComplete(adjacencyMatrix,k);
 		try{
 			bw.close();
