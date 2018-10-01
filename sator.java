@@ -4,7 +4,7 @@ import java.io.*;
 public class sator{
 	public static void main(String args[]){
 		// FileInputStream g = null;
-		File file = new File("./test.graph");
+		File file = new File("./"+args[1]+ ".graph");
 		// File file2 = new File("./test.satinput");
 		// file2.getParentFile().mkdirs();
 		// FileReader fr = new FileReader(args[0] + ".graph");
