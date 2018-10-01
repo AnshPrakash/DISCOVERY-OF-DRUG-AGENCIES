@@ -8,7 +8,7 @@ public class SAT {
 	static BufferedWriter bw =null;
 	static int[][] variable_names=null;
 
-	static int variable_name_count=0;
+	static variable_name_count=0;
 	public static void Non_Empty(){
 		try{
 			for (int k=1;k<variable_names[0].length;k++) {
