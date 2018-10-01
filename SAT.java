@@ -8,7 +8,7 @@ public class SAT {
 	static BufferedWriter bw =null;
 	static int[][] variable_names=null;
 
-	static variable_name_count=0;
+	static int variable_name_count=0;
 	public static void Non_Empty(){
 		try{
 			for (int k=1;k<variable_names[0].length;k++) {
@@ -50,20 +50,31 @@ public class SAT {
 		}
 	}
 
-	// public static void No_Subgraph(boolean[][] adjacencyMatrix,int k){
-	// 	int temp=variable_name_count+1;
-	// 	for (int i=1;i<variable_names.length;i++ ) {
-	// 		for (int j=i+1;j<variable_names.length;j++) {
-	// 			for (int k=1;k<variable_names[0].length;k++) {
-	// 				if (adjacencyMatrix[i][j]==true) {
-	// 					bw.write(temp+" ");
-	// 					temp+=1;
-	// 				}
-	// 			}
-	// 			bw.write("0\n");
-	// 		}
-	// 	}
-	// }
+	public static void No_Subgraph(boolean[][] adjacencyMatrix){
+		try{
+			String s="";
+			for (int i=1;i<variable_names.length;i++ ) {
+				for (int j=i+1;j<variable_names.length;j++) {
+					if (adjacencyMatrix[i][j]==true) {
+						for (int k=1;k<variable_names[0].length;k++) {
+							variable_name_count+=1;
+							bw.write(variable_name_count+" ");
+							s+="-"+variable_name_count+" "+variable_names[i][k]+" 0\n";
+							s+="-"+variable_name_count+" "+variable_names[j][k]+" 0\n";
+							s+=variable_name_count+" -"+variable_names[j][k]+" -"+variable_names[i][k]+" 0\n";
+						}
+						bw.write("0\n");
+						bw.write(s);
+						s="";
+					}
+				}
+			}	
+		}catch(Exception e){
+			System.out.println("Something went wrong in No_Subgraph function");
+		}
+
+		
+	}
 	// public static void AtLeastOneEdge(boolean[][] adjacencyMatrix,int k){
 
 	// }
@@ -100,7 +111,7 @@ public class SAT {
 		}
 
 		Non_Empty();
-		// No_Subgraph(boolean[][] adjacencyMatrix,int k);
+		No_Subgraph(adjacencyMatrix);
 		AtLeast_OneNode(adjacencyMatrix,k);
 		// AtLeastOneEdge(adjacencyMatrix,k);
 		AllKgraphComplete(adjacencyMatrix,k);
