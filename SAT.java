@@ -54,13 +54,24 @@ public class SAT {
 		try{
 			String s="";
 			for (int k1=1;k1<variable_names[0].length;k1++) {
-				for (int k2=k1+1;k2<variable_names[0].length ;k2++ ) {
+				for (int k2=1;k2<variable_names[0].length ;k2++ ) {
+					if (k1 == k2){
+						continue;
+					}
 					for (int i=1;i<variable_names.length;i++) {
 						variable_name_count+=1;
 						bw.write(variable_name_count+" ");
 						s+="-"+variable_name_count+" "+variable_names[i][k1]+" 0\n";
 						s+="-"+variable_name_count+" -"+variable_names[i][k2]+" 0\n";
 						s+=""+variable_name_count+" -"+variable_names[i][k1]+" "+variable_names[i][k2]+" 0\n";
+						// bw.write("0\n");
+						// variable_name_count+=1;
+						// bw.write(s);
+						// s="";
+						// bw.write(variable_name_count+" ");
+						// s+="-"+variable_name_count+" "+variable_names[i][k2]+" 0\n";
+						// s+="-"+variable_name_count+" -"+variable_names[i][k1]+" 0\n";
+						// s+=""+variable_name_count+" -"+variable_names[i][k2]+" "+variable_names[i][k1]+" 0\n";
 
 					}
 					bw.write("0\n");
@@ -97,7 +108,7 @@ public class SAT {
 		}
 	}
 
-	public static void GenerateSAT(boolean[][] adjacencyMatrix,int k){
+	public static void GenerateSAT(boolean[][] adjacencyMatrix,int k,String fileName){
 
 		variable_names=new int[adjacencyMatrix.length][k+1];
 		for (int j=0;j<variable_names.length ;j++ ) {
@@ -112,7 +123,7 @@ public class SAT {
 			}
 		}
 		variable_name_count=(variable_names.length-1)*(variable_names[0].length-1);
-		File sat_input_file=new File("./test.satinput");
+		File sat_input_file=new File(fileName+".satinput");
 		try{
 			bw = new BufferedWriter(new FileWriter(sat_input_file));
 			bw.write("p cnf ");
@@ -139,7 +150,7 @@ public class SAT {
 
 
 	public static void main(String[] args) {
-		File file = new File("./"+args[0]+ ".graph");
+		File file = new File(args[0]+ ".graph");
 		try{
 			Scanner scn = new Scanner(file);
 			int n = scn.nextInt();
@@ -162,7 +173,7 @@ public class SAT {
 				adjacencyMatrix[i][j] =true;
 				adjacencyMatrix[j][i] =true;
 			}
-			GenerateSAT(adjacencyMatrix,k);
+			GenerateSAT(adjacencyMatrix,k,args[0]);
 		}catch(FileNotFoundException ex){
 			// exception
 		}	

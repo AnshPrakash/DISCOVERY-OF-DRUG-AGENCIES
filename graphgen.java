@@ -3,21 +3,21 @@ import java.io.*;
 
 public class graphgen{
 	public static void main(String args[]){
-		File file = new File("./"+args[0]+ ".graph");
+		File file = new File(args[0]+ ".graph");
 		try{
 			Scanner scn = new Scanner(file);
 			int n = scn.nextInt();
 			int e = scn.nextInt();
 			int k = scn.nextInt();
-			subggen(n,k);
+			subggen(n,k,args[0]);
 		}catch(FileNotFoundException ex){
 			// exception
 		}	
 	}
 
-	public static void subggen(int n,int k){
-		File out = new File("./test.satoutput");
-		File helper = new File("./test.subgraphs");
+	public static void subggen(int n,int k,String filename){
+		File out = new File(filename+".satoutput");
+		File helper = new File(filename+".subgraphs");
 		try{
 			BufferedWriter bw1 = new BufferedWriter(new FileWriter(helper));
 			BufferedReader bw2 = new BufferedReader(new FileReader(out));
