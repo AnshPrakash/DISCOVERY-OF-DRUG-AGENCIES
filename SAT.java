@@ -51,7 +51,27 @@ public class SAT {
 	}
 
 	public static void No_Subgraph(boolean[][] adjacencyMatrix){
-		
+		try{
+			String s="";
+			for (int k1=1;k1<variable_names[0].length;k1++) {
+				for (int k2=1;k2<variable_names[0].length ;k2++ ) {
+					for (int i=1;i<variable_names.length;i++) {
+						variable_name_count+=1;
+						bw.write(variable_name_count+" ");
+						s+="-"+variable_name_count+" "+variable_names[i][k1]+" 0\n";
+						s+="-"+variable_name_count+" "+variable_names[i][k2]+" 0\n";
+						s+=variable_name_count+" -"+variable_names[i][k1]+" -"+variable_names[i][k2]+" 0\n";
+
+					}
+					bw.write("0\n");
+					bw.write(s);
+					s="";
+				}		
+			}	
+		}	
+		catch(Exception e){
+			System.out.println("Something went wrong in No_Subgraph function");
+		}
 	}
 	public static void AtLeastOneEdge(boolean[][] adjacencyMatrix){
 		try{
