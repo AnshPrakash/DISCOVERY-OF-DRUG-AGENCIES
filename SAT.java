@@ -54,13 +54,13 @@ public class SAT {
 		try{
 			String s="";
 			for (int k1=1;k1<variable_names[0].length;k1++) {
-				for (int k2=1;k2<variable_names[0].length ;k2++ ) {
+				for (int k2=k1+1;k2<variable_names[0].length ;k2++ ) {
 					for (int i=1;i<variable_names.length;i++) {
 						variable_name_count+=1;
 						bw.write(variable_name_count+" ");
 						s+="-"+variable_name_count+" "+variable_names[i][k1]+" 0\n";
-						s+="-"+variable_name_count+" "+variable_names[i][k2]+" 0\n";
-						s+=variable_name_count+" -"+variable_names[i][k1]+" -"+variable_names[i][k2]+" 0\n";
+						s+="-"+variable_name_count+" -"+variable_names[i][k2]+" 0\n";
+						s+=""+variable_name_count+" -"+variable_names[i][k1]+" "+variable_names[i][k2]+" 0\n";
 
 					}
 					bw.write("0\n");
@@ -123,22 +123,17 @@ public class SAT {
 			int numC = 2*(num_v*num_v)*(4*k+1) + (num_v);
 			bw.write(Integer.toString(numC)); 
 			bw.write("\n");
+			Non_Empty();
+			No_Subgraph(adjacencyMatrix);
+			AtLeast_OneNode(adjacencyMatrix,k);
+			AtLeastOneEdge(adjacencyMatrix);
+			AllKgraphComplete(adjacencyMatrix,k);
+			bw.close();
 		}
 		catch(Exception e){
 			System.out.println("Something went wrong! reading a file");
 		}
 
-		Non_Empty();
-		No_Subgraph(adjacencyMatrix);
-		AtLeast_OneNode(adjacencyMatrix,k);
-		AtLeastOneEdge(adjacencyMatrix);
-		AllKgraphComplete(adjacencyMatrix,k);
-		try{
-			bw.close();
-		}
-		catch(Exception e){
-			System.out.println("bw.close() didn't work haha");
-		}
 	}
 
 
